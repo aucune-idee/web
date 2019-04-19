@@ -1,11 +1,20 @@
-<nav class="navbar is-fixed-top is-transparent">
+<nav class="navbar is-fixed-top"
+  [class.is-transparent] = "isTransparent">
   <div class="navbar-brand">
     <a class="navbar-item" routerLink="/">
       N4B
     </a>
+
+    <a role="button" class="navbar-burger burger" [class.is-active]="isBurgerActive"
+      (click)="toogleBurger()">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
 
-  <div id="navbarExampleTransparentExample" class="navbar-menu">
+  <div class="navbar-menu"
+    [class.is-active]="isBurgerActive">
     <div class="navbar-start">
       <a class="navbar-item" routerLink="/">
         Home
