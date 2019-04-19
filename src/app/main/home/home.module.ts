@@ -8,7 +8,7 @@ import { MainComponent } from './main/main.component';
 @NgModule({
   imports: [
     CommonModule,
-    MainRoutingModule
+    HomeRoutingModule
   ],
   declarations: [MainComponent]
 })
