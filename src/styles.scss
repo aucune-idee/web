@@ -1,8 +1,7 @@
-//@import "initial-variables";
-//@import "functions";
+@import "initial-variables";
+@import "functions";
 
-//$button-color: $white !default
-//$button-background-color: $blue !default
+$primary: hsl(207, 100%, 71%);
 
 
-//@import "bulma";
+@import "bulma";
