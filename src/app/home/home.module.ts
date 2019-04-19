@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MainRoutingModule } from './main-routing.module';
+import { HomeRoutingModule } from './home-routing.module';
 
 import { MainComponent } from './main/main.component';
 
@@ -12,4 +12,4 @@ import { MainComponent } from './main/main.component';
   ],
   declarations: [MainComponent]
 })
-export class MainModule { }
+export class HomeModule { }
