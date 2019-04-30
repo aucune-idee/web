@@ -5,8 +5,6 @@ app.use(express.static('app'));
 
 let port = process.env.PORT ? process.env.port : 8080;
 const server = app.listen(port, ()=>{
-    const host = server.address().address;
-    const port = server.address().port;
   
-    console.log(`Example app listening at http://${host}:${port}`);
+    console.log('server started');
 });
