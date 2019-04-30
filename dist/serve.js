@@ -4,7 +4,7 @@ const app = express()
 app.use(express.static('app'));
 
 let port = process.env.PORT ? process.env.port : 8080;
-app.listen(port, ()=>{
+const server = app.listen(port, ()=>{
     const host = server.address().address;
     const port = server.address().port;
   
