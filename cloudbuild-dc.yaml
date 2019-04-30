@@ -10,4 +10,4 @@ steps:
 
   # Deploy to google cloud app egnine
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['app', 'deploy', '--version=1.0.0', './dist/app.yaml']
+    args: ['app', 'deploy', '--version=1‐0‐0', './dist/app.yaml']
