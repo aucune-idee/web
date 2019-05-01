@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "nativescript-angular": "~7.2.0",
+    "nativescript-theme-core": "~1.0.4",
+    "reflect-metadata": "~0.1.12",
+    "tns-core-modules": "~5.2.0",
     "@angular/common": "^7.2.13",
     "@angular/compiler": "^7.2.13",
     "@angular/core": "^7.2.13",
@@ -13,6 +17,7 @@
     "@fortawesome/angular-fontawesome": "^0.3.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.17",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
+    "@nativescript/schematics": "^0.5.2",
     "bulma": "^0.7.4",
     "core-js": "2",
     "node-sass": "^4.11.0",
@@ -20,6 +25,10 @@
     "zone.js": "^0.9.0"
   },
   "scripts": {
+    "android": "tns run android --bundle",
+    "ios": "tns run ios --bundle",
+    "mobile": "tns run --bundle",
+    "preview": "tns preview --bundle",
     "ng": "ng",
     "start": "ng serve --env=dc",
     "build": "ng build --buildOptimizer --optimization --aot",
@@ -28,6 +37,8 @@
     "e2e": "ng e2e"
   },
   "devDependencies": {
+    "nativescript-dev-webpack": "^0.20.0",
+    "@nativescript/schematics": "~0.4.0",
     "@angular-devkit/build-angular": "~0.10.0",
     "@angular/cli": "~7.0.2",
     "@angular/compiler-cli": "~7.0.0",
@@ -47,5 +58,8 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.1"
+  },
+  "nativescript": {
+    "id": "org.nativescript.ngsample"
   }
 }

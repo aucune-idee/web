@@ -9,6 +9,8 @@ export class NavBarComponent implements OnInit {
 
   @Input()
   public isTransparent:boolean=false;
+  @Input()
+  public isWide:boolean=false;
 
   public isBurgerActive:boolean=false;
 
