@@ -8,7 +8,7 @@ import { SigninComponent } from './signin/signin.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
-  { path: '', component: MainComponent, children:[
+  { path: '', component: MainComponent, children: [
     { path: '', pathMatch: 'full', redirectTo: '/home'},
     { path: 'about', component: AboutComponent},
     { path: 'signin', component: SigninComponent}
