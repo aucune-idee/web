@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { MainRoutingModule } from './main-routing.module';
 
@@ -12,7 +13,8 @@ import { SigninComponent } from './signin/signin.component';
 @NgModule({
   imports: [
     CommonModule,
-    MainRoutingModule
+    MainRoutingModule,
+    FormsModule
   ],
   declarations: [
     HomeComponent,
