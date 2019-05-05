@@ -21,6 +21,9 @@
       "@services/*": [
         "./src/app/services/*"
       ],
+      "@models/*": [
+        "./src/app/models/*"
+      ],
       "@environment": ["./src/environments/environment.ts"]
     }
   }

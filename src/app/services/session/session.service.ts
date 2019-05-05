@@ -6,8 +6,9 @@ import { tap, shareReplay, map } from 'rxjs/operators';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-
 import { environment } from '@environment';
+
+import { User } from '@models/user';
 
 export interface SigninInput{
   id: String;
@@ -29,7 +30,7 @@ export class SessionService {
 
   private readonly TOKEN_KEY:string = "token";
   private readonly jwt:JwtHelperService = new JwtHelperService();
-  private readonly subject:BehaviorSubject<SigninOutput> = new BehaviorSubject<SigninOutput>(null);
+  private readonly subject:BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient) { }
   
@@ -43,19 +44,17 @@ export class SessionService {
         }),
         map((output:SigninResponse) => {
           let tokenData:SigninOutput = this.jwt.decodeToken(output.token) as SigninOutput;
-          this.subject.next(tokenData);
+          this.subject.next(tokenData as User);
           return tokenData
         })
       );
   }
   
-  public authState():BehaviorSubject<SigninOutput>{
+  public authState():BehaviorSubject<User>{
     return this.subject;
   }
   
   public getToken(): string {
     return localStorage.getItem(this.TOKEN_KEY);
   }
-  
-  
 }

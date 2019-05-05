@@ -31,7 +31,7 @@
     "mobile": "tns run --bundle",
     "preview": "tns preview --bundle",
     "ng": "ng",
-    "start": "ng serve --env=dc",
+    "start": "ng serve --configuration=dc",
     "build": "ng build --buildOptimizer --optimization --aot",
     "test": "ng test",
     "lint": "ng lint",

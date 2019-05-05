@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { SessionService, SigninOutput} from '@services/session/session.service';
+import { User } from '@models/user';
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -13,6 +16,8 @@ export class NavBarComponent implements OnInit {
   public isWide:boolean=false;
 
   public isBurgerActive:boolean=false;
+
+  public loggedUser:User;
 
   constructor() { }
 

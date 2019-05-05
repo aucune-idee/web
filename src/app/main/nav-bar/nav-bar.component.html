@@ -20,12 +20,19 @@
             <a class="navbar-item" routerLink="/">
               Home
             </a>
-            <a class="navbar-item" routerLink="/signin">
-              Sign in
-            </a>
-            <a class="navbar-item" routerLink="/about">
-              About
-            </a>
+            <ng-container *ngIf="loggedUser;else loggedOut">
+              <a class="navbar-item" routerLink="/profil">
+                {{loggedUser.username}}
+              </a>
+            </ng-container>
+            <ng-template #loggedOut>
+              <a class="navbar-item" routerLink="/signin">
+                Sign in
+              </a>
+              <a class="navbar-item" routerLink="/about">
+                About
+              </a>
+            </ng-template>
           </div>
         </div>
   </div>
