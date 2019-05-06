@@ -19,7 +19,9 @@ export class NavBarComponent implements OnInit {
 
   public loggedUser:User;
 
-  constructor() { }
+  constructor(session:SessionService) {
+    session.authState().subscribe((user:User) => this.loggedUser = user);
+  }
 
   ngOnInit() {
   }

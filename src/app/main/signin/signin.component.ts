@@ -11,9 +11,7 @@ export class SigninComponent implements OnInit {
 
   public data:SigninInput = {id:"",password: ""}
 
-  constructor(private service:SessionService) {
-    console.log(this.service);
-  }
+  constructor(private service:SessionService) {}
 
   ngOnInit() {
   }
