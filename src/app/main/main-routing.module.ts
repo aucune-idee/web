@@ -7,11 +7,13 @@ import { AboutComponent } from './about/about.component';
 import { SigninComponent } from './signin/signin.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent},
+  { path: 'home', component: HomeComponent, data: {animation: 'HomePage'}},
   { path: '', component: MainComponent, children: [
     { path: '', pathMatch: 'full', redirectTo: '/home'},
-    { path: 'about', component: AboutComponent},
-    { path: 'signin', component: SigninComponent}
+    { path: 'about', component: AboutComponent, data: {animation: 'AboutPage'}},
+    { path: 'signin', component: SigninComponent},
+    { path: 'play', pathMatch: 'full', redirectTo: '/lobby'},
+    { path: 'lobby', loadChildren: './lobby/lobby.module#LobbyModule'}
   ]}
 ];
 

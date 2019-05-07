@@ -32,7 +32,9 @@ export class SessionService {
   private readonly jwt:JwtHelperService = new JwtHelperService();
   private readonly subject:BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.subject.next(this.getTokenData());
+  }
   
   public auth(input:SigninInput):Observable<SigninOutput>{
     return this.http.post<SigninResponse>(environment.urls.users[0]+"/auth", input)
@@ -40,7 +42,6 @@ export class SessionService {
         shareReplay(1),
         tap((output:SigninResponse) => {
           localStorage.setItem(this.TOKEN_KEY, output.token);
-          
         }),
         map((output:SigninResponse) => {
           let tokenData:SigninOutput = this.jwt.decodeToken(output.token) as SigninOutput;
@@ -56,5 +57,16 @@ export class SessionService {
   
   public getToken(): string {
     return localStorage.getItem(this.TOKEN_KEY);
+  }
+  
+  public getTokenData():User{
+    let token = this.getToken();
+    if(token === undefined || token === null){
+      return null;
+    }
+    if(this.jwt.isTokenExpired(token)){
+      return null;
+    }
+    return this.jwt.decodeToken(token) as User;
   }
 }

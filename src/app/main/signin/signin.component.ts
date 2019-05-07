@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 
 import { SessionService, SigninInput, SigninOutput } from '@services/session';
 
@@ -11,7 +12,9 @@ export class SigninComponent implements OnInit {
 
   public data:SigninInput = {id:"",password: ""}
 
-  constructor(private service:SessionService) {}
+  constructor(
+    private service:SessionService,
+    private router:Router) {}
 
   ngOnInit() {
   }
@@ -19,7 +22,9 @@ export class SigninComponent implements OnInit {
 
   onSubmit():void{
     this.service.auth(this.data).subscribe(
-      (output:SigninOutput)=> console.log(output),
+      (output:SigninOutput)=> {
+        this.router.navigate(['/']);
+      },
       (error:any)=>console.error(error)
     );
   }

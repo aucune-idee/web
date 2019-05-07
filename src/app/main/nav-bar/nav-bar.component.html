@@ -20,18 +20,33 @@
             <a class="navbar-item" routerLink="/">
               Home
             </a>
-            <ng-container *ngIf="loggedUser;else loggedOut">
-              <a class="navbar-item" routerLink="/profil">
-                {{loggedUser.username}}
+            <a class="navbar-item" routerLink="/about">
+              About
+            </a>
+            <ng-container *ngIf="loggedUser">
+              <a class="navbar-item" routerLink="/play">
+                Play
               </a>
             </ng-container>
+          </div>
+          <div class="navbar-end">
+          <ng-container *ngIf="loggedUser;else loggedOut">
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  {{loggedUser.username}}
+                </a>
+              
+                <div class="navbar-dropdown">
+                   <a class="navbar-item" routerLink="/profil">Profil</a>
+                </div>
+              </div>
+            </ng-container>
             <ng-template #loggedOut>
-              <a class="navbar-item" routerLink="/signin">
-                Sign in
-              </a>
-              <a class="navbar-item" routerLink="/about">
-                About
-              </a>
+              <div class="navbar-item">
+                  <a routerLink="/signin">
+                    Sign in
+                  </a>
+              </div>
             </ng-template>
           </div>
         </div>
