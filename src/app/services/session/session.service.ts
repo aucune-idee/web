@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable,BehaviorSubject, throwError } from 'rxjs';
+import { Observable,BehaviorSubject } from 'rxjs';
 import { tap, shareReplay, map } from 'rxjs/operators';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
