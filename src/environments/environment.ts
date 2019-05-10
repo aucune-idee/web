@@ -9,7 +9,7 @@ export const environment = {
         "https://users-dot-n4b-dev.appspot.com"
     ],
     lobbies :[
-        "https://game-dot-n4b-dev.appspot.com/"
+        "https://game-dot-n4b-dev.appspot.com"
     ]
   }
 };

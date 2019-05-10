@@ -10,15 +10,15 @@ import { LobbiesService, GetLobbiesOutput } from '@services/lobbies';
 })
 export class DashboardComponent implements OnInit {
 
-  lobbies:Array<Lobby>;
+  lobbies:Array<Lobby> = [];
 
   constructor(
     private lobbiesService:LobbiesService
   ) {
     this.lobbiesService.getLobbies()
       .subscribe((output:GetLobbiesOutput) =>{
+        console.log(output);
         this.lobbies = output.lobbies;
-        console.log(this.lobbies);
       });
   }
 

@@ -1,3 +1,14 @@
-<ng-container>
-
+<ng-container *ngIf="lobbies">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lobby of lobbies">
+                <td>{{lobby.name}}</td>
+            </tr>
+        </tbody>
+    </table>
 </ng-container>
