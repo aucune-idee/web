@@ -22,6 +22,15 @@ export class DashboardComponent implements OnInit {
       });
   }
 
+  createLobby(){
+    this.lobbiesService.createLobby({name:"Name test"}).subscribe(created => {
+      console.log(created)
+    },
+    err => {
+      console.error(err);
+    });
+  }
+
   ngOnInit() {
   }
 

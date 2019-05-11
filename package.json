@@ -33,6 +33,7 @@
     "preview": "tns preview --bundle",
     "ng": "ng",
     "start": "ng serve --configuration=dc",
+    "local": "ng serve --configuration=local",
     "build": "ng build --buildOptimizer --optimization --aot",
     "test": "ng test",
     "lint": "ng lint",

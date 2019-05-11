@@ -5,10 +5,10 @@
 export const environment = {
   production: false,
   urls :{
-    users :[
+    user :[
         "https://users-dot-n4b-dev.appspot.com"
     ],
-    lobbies :[
+    game :[
         "https://game-dot-n4b-dev.appspot.com"
     ]
   }

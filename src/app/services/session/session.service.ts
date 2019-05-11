@@ -37,7 +37,7 @@ export class SessionService {
   }
   
   public auth(input:SigninInput):Observable<SigninOutput>{
-    return this.http.post<SigninResponse>(environment.urls.users[0]+"/auth", input)
+    return this.http.post<SigninResponse>(environment.urls.user[0]+"/auth", input)
       .pipe(
         shareReplay(1),
         tap((output:SigninResponse) => {
