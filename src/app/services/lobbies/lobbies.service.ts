@@ -7,6 +7,8 @@ import { shareReplay } from 'rxjs/operators';
 import { environment } from '@environment';
 import { Lobby } from '@models/lobby';
 
+import { GameType } from '@enums/game-type';
+
 export interface GetLobbiesInput{
   start?:Number,
   size?:Number
@@ -18,7 +20,8 @@ export interface GetLobbiesOutput{
 }
 
 export interface CreateLobbyInput{
-  name:String
+  name:String,
+  type:GameType,
 }
 
 const LOBBY_PATH = "/lobbies";

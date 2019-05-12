@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { Lobby } from '@models/lobby';
 import { LobbiesService, GetLobbiesOutput } from '@services/lobbies';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-lobby-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
 
   lobbies:Array<Lobby> = [];
+  showModal:boolean = false;
 
   constructor(
+    private router:Router,
+    public deviceDetector:DeviceDetectorService,
     private lobbiesService:LobbiesService
   ) {
     this.lobbiesService.getLobbies()
@@ -22,13 +28,18 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  createLobby(){
-    this.lobbiesService.createLobby({name:"Name test"}).subscribe(created => {
-      console.log(created)
-    },
-    err => {
-      console.error(err);
-    });
+  createLobby():void{
+    if(this.deviceDetector.isMobile()){
+      this.router.navigate(['/lobby/create']);
+    }
+    else{
+      this.showModal = true;
+    }
+  }
+
+  onLobbyCreated(lobby):void{
+    console.log(lobby);
+    this.showModal = false;
   }
 
   ngOnInit() {

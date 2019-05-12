@@ -1,0 +1,21 @@
+<form (submit)="submit()">
+  <div class="field">
+      <label class="label">Game's name</label>
+      <div class="control">
+        <input name="name" class="input" type="text" placeholder="Game's name">
+      </div>
+      <div class="field">
+        <label class="label">Type</label>
+        <div class="buttons control">
+            <button *ngFor="let type of types; let i = index"
+            (click)="data.type = gameType[type]"
+            type="button" 
+            class="button"
+            [class.is-primary] = "i == data.type">
+              {{type}}
+            </button>
+        </div>
+    </div>
+  </div>
+  <button type="submit()" class="button is-primary">Create</button>
+</form>
