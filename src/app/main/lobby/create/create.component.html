@@ -2,7 +2,8 @@
   <div class="field">
       <label class="label">Game's name</label>
       <div class="control">
-        <input name="name" class="input" type="text" placeholder="Game's name">
+        <input [(ngModel)]="data.name"
+        name="name" class="input" type="text" placeholder="Game's name">
       </div>
       <div class="field">
         <label class="label">Type</label>
