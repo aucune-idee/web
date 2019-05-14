@@ -1,27 +1,45 @@
-<button class="button is-primary" (click)="createLobby()">Create lobby</button>
-<ng-container *ngIf="lobbies">
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let lobby of lobbies">
-                <td>{{lobby.name}}</td>
-            </tr>
-        </tbody>
-    </table>
-</ng-container>
-<div *ngIf="!deviceDetector.isMobile()"
-    class="modal"
-    [class.is-active]="showModal">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-        <div class="box">
-            <h3 class="title is-3">Create lobby</h3>
-            <app-lobby-create (LobbyCreated) = "onLobbyCreated($event)"></app-lobby-create>
-        </div>
+<div class="columns">
+    <div class="column">
+        <button class="button is-primary is-pulled-right" (click)="createLobby()">
+            <span class="icon is-small">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span>Create lobby</span>
+        </button>
+        <h4 class="title is-4">
+            My current lobbies
+        </h4>
+        <ng-container *ngIf="lobbies;else noLobby">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let lobby of lobbies">
+                        <td>{{lobby.name}}</td>
+                        <td>{{lobby.type}}</td>
+                        <td>{{lobby.members.length + 1 }} / {{lobby.size}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </ng-container>
+        <ng-template #noLobby>
+            none
+        </ng-template>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
-</div>
+    <div class="column">
+        <h4 class="title is-4">
+            My current games
+        </h4>
+    </div>
+  </div>
+
+
+<app-modal #modal>
+    <div class="box">
+        <h3 class="title is-3">Create lobby</h3>
+        <app-lobby-create (LobbyCreated) = "onLobbyCreated($event)"></app-lobby-create>
+    </div>
+</app-modal>

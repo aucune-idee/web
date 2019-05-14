@@ -19,7 +19,7 @@ export class NavBarComponent implements OnInit {
 
   public loggedUser:User;
 
-  constructor(session:SessionService) {
+  constructor(private session:SessionService) {
     session.authState().subscribe((user:User) => this.loggedUser = user);
   }
 
@@ -28,5 +28,9 @@ export class NavBarComponent implements OnInit {
 
   public toogleBurger():void{
     this.isBurgerActive = !this.isBurgerActive;
+  }
+
+  signout(){
+    this.session.logout();
   }
 }

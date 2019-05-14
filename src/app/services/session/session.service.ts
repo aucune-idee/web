@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
-import { Observable,BehaviorSubject } from 'rxjs';
-import { tap, shareReplay, map } from 'rxjs/operators';
+import { Observable,BehaviorSubject, of, Subscription } from 'rxjs';
+import { tap, shareReplay, map, delay } from 'rxjs/operators';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -31,9 +32,12 @@ export class SessionService {
   private readonly TOKEN_KEY:string = "token";
   private readonly jwt:JwtHelperService = new JwtHelperService();
   private readonly subject:BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  private logoutSubscription:Subscription;
 
-  constructor(private http: HttpClient) {
-    this.subject.next(this.getTokenData());
+  constructor(
+    private http: HttpClient,
+    private router:Router) {
+    this.updateTokenData();
   }
   
   public auth(input:SigninInput):Observable<SigninOutput>{
@@ -45,7 +49,7 @@ export class SessionService {
         }),
         map((output:SigninResponse) => {
           let tokenData:SigninOutput = this.jwt.decodeToken(output.token) as SigninOutput;
-          this.subject.next(tokenData as User);
+          this.updateTokenData();
           return tokenData
         })
       );
@@ -67,6 +71,30 @@ export class SessionService {
     if(this.jwt.isTokenExpired(token)){
       return null;
     }
+    console.log(this.jwt.getTokenExpirationDate(this.getToken()), new Date())
     return this.jwt.decodeToken(token) as User;
+  }
+
+  logout():void{
+    localStorage.removeItem(this.TOKEN_KEY);
+    this.subject.next(null);
+    this.router.navigate(["/signin"], { queryParams: { redirect: this.router.url}});
+  }
+
+  private updateTokenData(){
+    this.subject.next(this.getTokenData() as User);
+    if(this.logoutSubscription !== undefined && this.logoutSubscription !== null){
+      this.logoutSubscription.unsubscribe();
+    }
+    if(this.getToken() === null){
+      return;
+    }
+    this.logoutSubscription = of(null)
+    .pipe(
+      delay(this.jwt.getTokenExpirationDate(this.getToken()).getTime() - new Date().getTime() - 1000)
+    ).subscribe(()=>{
+      console.log("auto logout")
+      this.logout();
+    })
   }
 }

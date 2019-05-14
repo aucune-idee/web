@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { MainRoutingModule } from './main-routing.module';
 
+import { ComponentsModule } from '@components/components.module';
+
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
 import { AboutComponent } from './about/about.component';
@@ -14,6 +16,7 @@ import { SigninComponent } from './signin/signin.component';
   imports: [
     CommonModule,
     MainRoutingModule,
+    ComponentsModule,
     FormsModule
   ],
   declarations: [

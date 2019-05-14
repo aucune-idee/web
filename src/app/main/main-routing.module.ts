@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { LoggedGuard } from '@guards/index';
+
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
 import { AboutComponent } from './about/about.component';
@@ -13,12 +15,14 @@ const routes: Routes = [
     { path: 'about', component: AboutComponent, data: {animation: 'AboutPage'}},
     { path: 'signin', component: SigninComponent},
     { path: 'play', pathMatch: 'full', redirectTo: '/lobby'},
-    { path: 'lobby', loadChildren: './lobby/lobby.module#LobbyModule'}
+    { path: 'lobby',
+      loadChildren: './lobby/lobby.module#LobbyModule',
+      canActivate: [LoggedGuard]}
   ]}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule ]
+  exports: [RouterModule]
 })
 export class MainRoutingModule { }

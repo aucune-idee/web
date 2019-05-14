@@ -27,6 +27,12 @@
       "@models/*": [
         "./src/app/models/*"
       ],
+      "@components/*": [
+        "src/app/components/*"
+      ],
+      "@guards/*": [
+        "src/app/guards/*"
+      ],
       "@environment": ["./src/environments/environment.ts"]
     }
   }

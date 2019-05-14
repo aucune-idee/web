@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { Lobby } from '@models/lobby';
 import { LobbiesService, GetLobbiesOutput } from '@services/lobbies';
+import { ModalComponent } from '@components/index';
 
 @Component({
   selector: 'app-lobby-dashboard',
@@ -16,14 +17,16 @@ export class DashboardComponent implements OnInit {
   lobbies:Array<Lobby> = [];
   showModal:boolean = false;
 
+  @ViewChild(ModalComponent)
+  private modal:ModalComponent;
+
   constructor(
     private router:Router,
     public deviceDetector:DeviceDetectorService,
     private lobbiesService:LobbiesService
   ) {
-    this.lobbiesService.getLobbies()
+    this.lobbiesService.getOwnLobbies()
       .subscribe((output:GetLobbiesOutput) =>{
-        console.log(output);
         this.lobbies = output.lobbies;
       });
   }
@@ -33,13 +36,13 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/lobby/create']);
     }
     else{
-      this.showModal = true;
+      this.modal.show();
     }
   }
 
   onLobbyCreated(lobby):void{
     console.log(lobby);
-    this.showModal = false;
+    this.modal.close();
   }
 
   ngOnInit() {
