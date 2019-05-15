@@ -39,6 +39,9 @@ export class LobbiesService {
   public getOwnLobbies():Observable<GetLobbiesOutput>{
     return this.http.get<GetLobbiesOutput>(environment.urls.game[0]+LOBBY_PATH+"/own");
   }
+  public getLobby(id:Number):Observable<Lobby>{
+    return this.http.get<Lobby>(environment.urls.game[0]+LOBBY_PATH+"/"+id);
+  }
 
   public createLobby(input: CreateLobbyInput): Observable<Lobby>{
     let headers = new HttpHeaders();

@@ -18,11 +18,17 @@
       "dom"
     ],
     "paths": {
+      "@services": [
+        "./src/app/services/index"
+      ],
       "@services/*": [
         "./src/app/services/*"
       ],
       "@enums/*": [
         "./src/app/enums/*"
+      ],
+      "@models": [
+        "./src/app/models/index"
       ],
       "@models/*": [
         "./src/app/models/*"

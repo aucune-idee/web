@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let lobby of lobbies">
+                    <tr *ngFor="let lobby of lobbies" [routerLink]="['./view', lobby._id]">
                         <td>{{lobby.name}}</td>
                         <td>{{lobby.type}}</td>
                         <td>{{lobby.members.length + 1 }} / {{lobby.size}}</td>
