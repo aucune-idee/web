@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { environment } from '@environment';
 
@@ -19,6 +19,15 @@ export class UsersService {
 
   public getUsers(ids:Array<Number>):Observable<Array<User>>{
     console.log(ids);
-    return this.http.get<Array<User>>(environment.urls.user[0]+USERS_PATH+"/"+ids.join(";"));
+    return this.http.get<Array<User> | User>(environment.urls.user[0]+USERS_PATH+"/"+ids.join("-"))
+      .pipe(
+        map(v => {
+          if(v instanceof Array){
+            return v as Array<User>;
+          }
+          return [v as User];
+        })
+  
+      );
   }
 }

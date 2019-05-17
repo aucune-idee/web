@@ -9,6 +9,7 @@ export class Lobby {
     owner:number;
     members:Array<{
       _userId:number;
+      username?:String;
       army:Armies
     }>
     size:number;

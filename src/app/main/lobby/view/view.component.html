@@ -2,6 +2,18 @@
   <ng-container *ngIf="lobby;">
     <h4 class="title is-5">{{lobby.name}}</h4>
 
-    
+    <div class="columns">
+      <div *ngFor="let member of lobby.members" 
+        class="column is-one-quarter-fullhd is-one-quarter-widescreen is-one-third-desktop is-half-mobile">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-header-title">{{member.username}}</div>
+          </div>
+          <div class="card-content">
+            {{member.army}}
+          </div>
+        </div>
+      </div>
+    </div>
   </ng-container>
 </div>

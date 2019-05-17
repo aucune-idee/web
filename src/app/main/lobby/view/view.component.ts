@@ -25,10 +25,18 @@ export class ViewComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         this.lobbyService.getLobby(+params.get('id'))),
+        mergeMap(lobby => this.userService
+          .getUsers(lobby.members.map(member => member._userId)),
+          (lobby, users) => {
+            console.log(users);
+            for(let member of lobby.members){
+              member.username = users.find(u => u._id == member._userId).username;
+            }
+            return lobby;
+          })
     ).subscribe(lobby => {
       this.lobby = lobby;
-      this.userService
-          .getUsers(lobby.members.map(member => member._userId)).subscribe(users => console.log(users))
+      console.log(lobby);
     })
   }
 

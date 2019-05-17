@@ -1,5 +1,5 @@
 export interface User {
-  id: String;
+  _id: number;
   username: String;
   roles: Array<String>;
 }
