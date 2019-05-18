@@ -6,6 +6,7 @@ import { switchMap, mergeMap } from 'rxjs/operators';
 import { Lobby } from '@models/lobby';
 import { LobbiesService } from '@services/lobbies';
 import { UsersService } from '@services/users';
+import { SessionService } from '@services/session';
 
 @Component({
   selector: 'app-view',
@@ -15,11 +16,22 @@ import { UsersService } from '@services/users';
 export class ViewComponent implements OnInit {
 
   lobby:Lobby;
+  id:number;
 
   constructor(
     private route:ActivatedRoute,
     private lobbyService:LobbiesService,
-    private userService:UsersService) { }
+    private userService:UsersService,
+    private session:SessionService) {
+      session.authState().subscribe(auth => {
+        if(auth){
+          this.id = auth.id;
+        }
+        else{
+          this.id = null;
+        }
+      })
+    }
 
   ngOnInit() {
     this.route.paramMap.pipe(
@@ -38,6 +50,11 @@ export class ViewComponent implements OnInit {
       this.lobby = lobby;
       console.log(lobby);
     })
+  }
+
+  isMember():boolean{
+    console.log(this.lobby.members.find(m => m._userId == this.id));
+    return this.lobby.members.find(m => m._userId == this.id) != null;
   }
 
 }

@@ -2,7 +2,7 @@
   <ng-container *ngIf="lobby;">
     <h4 class="title is-5">{{lobby.name}}</h4>
 
-    <div class="columns">
+    <div class="columns is-mobile">
       <div *ngFor="let member of lobby.members" 
         class="column is-one-quarter-fullhd is-one-quarter-widescreen is-one-third-desktop is-half-mobile">
         <div class="card">
@@ -14,6 +14,12 @@
           </div>
         </div>
       </div>
+    </div>
+    <div>
+      <button *ngIf="!isMember();else leave" class="button is-primary">Join</button>
+      <ng-template #leave>
+        <button class="button is-primary">Leave</button>
+      </ng-template>
     </div>
   </ng-container>
 </div>

@@ -24,6 +24,12 @@ interface SigninResponse{
   token:string
 } 
 
+export interface AuthData {
+  id: number;
+  username: String;
+  roles: Array<String>;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,7 +37,7 @@ export class SessionService {
 
   private readonly TOKEN_KEY:string = "token";
   private readonly jwt:JwtHelperService = new JwtHelperService();
-  private readonly subject:BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  private readonly subject:BehaviorSubject<AuthData> = new BehaviorSubject<AuthData>(null);
   private logoutSubscription:Subscription;
 
   constructor(
@@ -55,7 +61,7 @@ export class SessionService {
       );
   }
   
-  public authState():BehaviorSubject<User>{
+  public authState():BehaviorSubject<AuthData>{
     return this.subject;
   }
   
@@ -63,7 +69,7 @@ export class SessionService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
   
-  public getTokenData():User{
+  public getTokenData():AuthData{
     let token = this.getToken();
     if(token === undefined || token === null){
       return null;
@@ -72,7 +78,7 @@ export class SessionService {
       return null;
     }
     console.log(this.jwt.getTokenExpirationDate(this.getToken()), new Date())
-    return this.jwt.decodeToken(token) as User;
+    return this.jwt.decodeToken(token) as AuthData;
   }
 
   logout():void{
@@ -82,7 +88,7 @@ export class SessionService {
   }
 
   private updateTokenData(){
-    this.subject.next(this.getTokenData() as User);
+    this.subject.next(this.getTokenData() as AuthData);
     if(this.logoutSubscription !== undefined && this.logoutSubscription !== null){
       this.logoutSubscription.unsubscribe();
     }

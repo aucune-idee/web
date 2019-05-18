@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { SessionService, SigninOutput} from '@services/session/session.service';
+import { SessionService, AuthData} from '@services/session/session.service';
 import { User } from '@models/user';
 
 @Component({
@@ -17,10 +17,10 @@ export class NavBarComponent implements OnInit {
 
   public isBurgerActive:boolean=false;
 
-  public loggedUser:User;
+  public loggedUser:AuthData;
 
   constructor(private session:SessionService) {
-    session.authState().subscribe((user:User) => this.loggedUser = user);
+    session.authState().subscribe(user => this.loggedUser = user);
   }
 
   ngOnInit() {
