@@ -41,7 +41,6 @@ export class DashboardComponent implements OnInit {
   }
 
   onLobbyCreated(lobby):void{
-    console.log(lobby);
     this.modal.close();
   }
 

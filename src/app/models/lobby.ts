@@ -1,7 +1,7 @@
 import { GameType, Armies } from '@enums/index';
 
 export class Lobby {
-    id:number;
+    _id:number;
     createdAt: Date;
     name:String;
     type: GameType;
@@ -10,7 +10,7 @@ export class Lobby {
     members:Array<{
       _userId:number;
       username?:String;
-      army:Armies
+      army?:Armies
     }>
     size:number;
 }

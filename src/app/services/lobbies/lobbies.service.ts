@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, map } from 'rxjs/operators';
 
 import { environment } from '@environment';
 import { Lobby } from '@models/lobby';
@@ -49,6 +49,18 @@ export class LobbiesService {
     return this.http.post<Lobby>(environment.urls.game[0]+LOBBY_PATH, input, {headers:headers})
     .pipe(
       shareReplay(1)
+    )
+  }
+  public leaveLobby(id: number): Observable<boolean>{
+    return this.http.put(environment.urls.game[0]+LOBBY_PATH+"/"+ id+"/leave", {})
+    .pipe(
+      map(() => true)
+    )
+  }
+  public joinLobby(id: number): Observable<boolean>{
+    return this.http.put(environment.urls.game[0]+LOBBY_PATH+"/"+ id+"/join", {})
+    .pipe(
+      map(() => true)
     )
   }
 }

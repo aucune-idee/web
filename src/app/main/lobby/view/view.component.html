@@ -1,25 +1,34 @@
 <div [class.is-loading]="!lobby">
   <ng-container *ngIf="lobby;">
-    <h4 class="title is-5">{{lobby.name}}</h4>
+    <h4 class="title is-4">{{lobby.name}}</h4>
 
-    <div class="columns is-mobile">
+    <div>
+      <button *ngIf="!isMember();else leaveButton" (click)="join()" class="button is-primary">Join</button>
+      <ng-template #leaveButton>
+        <button (click)="leave()" class="button is-primary">Leave</button>
+      </ng-template>
+    </div>
+    
+    <hr />
+    <h5 class="title is-5">Members</h5>
+
+    <div class="columns is-multiline is-mobile">
       <div *ngFor="let member of lobby.members" 
         class="column is-one-quarter-fullhd is-one-quarter-widescreen is-one-third-desktop is-half-mobile">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-header-title">{{member.username}}</div>
-          </div>
-          <div class="card-content">
-            {{member.army}}
-          </div>
+        <div class="box">
+          <ng-container *ngIf="member._userId >= 0;else freeSlot">
+              <strong>{{member.username}}</strong> : <br />
+              {{member.army ? member.army : "no army selected"}}
+          </ng-container>
+          <ng-template #freeSlot>
+            <div class="is-vertical-center">
+              <span class="icon has-text-grey-light">
+                <i class="fas fa-3x fa-user"></i>
+              </span>
+            </div>
+          </ng-template>
         </div>
       </div>
-    </div>
-    <div>
-      <button *ngIf="!isMember();else leave" class="button is-primary">Join</button>
-      <ng-template #leave>
-        <button class="button is-primary">Leave</button>
-      </ng-template>
     </div>
   </ng-container>
 </div>

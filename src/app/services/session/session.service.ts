@@ -51,7 +51,7 @@ export class SessionService {
       .pipe(
         shareReplay(1),
         tap((output:SigninResponse) => {
-          localStorage.setItem(this.TOKEN_KEY, output.token);
+          sessionStorage.setItem(this.TOKEN_KEY, output.token);
         }),
         map((output:SigninResponse) => {
           let tokenData:SigninOutput = this.jwt.decodeToken(output.token) as SigninOutput;
@@ -66,7 +66,7 @@ export class SessionService {
   }
   
   public getToken(): string {
-    return localStorage.getItem(this.TOKEN_KEY);
+    return sessionStorage.getItem(this.TOKEN_KEY);
   }
   
   public getTokenData():AuthData{
@@ -82,7 +82,7 @@ export class SessionService {
   }
 
   logout():void{
-    localStorage.removeItem(this.TOKEN_KEY);
+    sessionStorage.removeItem(this.TOKEN_KEY);
     this.subject.next(null);
     this.router.navigate(["/signin"], { queryParams: { redirect: this.router.url}});
   }
