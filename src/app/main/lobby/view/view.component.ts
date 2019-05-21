@@ -6,6 +6,7 @@ import { switchMap, mergeMap, map } from 'rxjs/operators';
 import { Lobby } from '@models/lobby';
 import { LobbiesService } from '@services/lobbies';
 import { UsersService } from '@services/users';
+import { Armies } from '@enums/index';
 import { SessionService } from '@services/session';
 
 @Component({
@@ -17,6 +18,9 @@ export class ViewComponent implements OnInit {
 
   lobby:Lobby;
   userId:number;
+  armies = Armies;
+  types = Object.keys(Armies).filter(key => !isNaN(Number(Armies[key])));
+  currentArmy:Armies = null;
 
   constructor(
     private route:ActivatedRoute,
@@ -26,6 +30,7 @@ export class ViewComponent implements OnInit {
       session.authState().subscribe(auth => {
         if(auth){
           this.userId = auth.id;
+          this.updateCurrentArmy();
         }
         else{
           this.userId = null;
@@ -56,6 +61,17 @@ export class ViewComponent implements OnInit {
       this.refreshLobby();
     });
   }
+
+  public selectArmy(type):void{
+    this.currentArmy = type;
+    this.lobby.members.find(m => m._userId == this.userId)
+      .army = type;
+
+    this.lobbyService.selectArmy({
+      lobbyId: this.lobby._id,
+      army : type
+    }).subscribe(()=>{})
+  }
   
   private refreshLobby(){
     this.route.paramMap.pipe(
@@ -81,6 +97,15 @@ export class ViewComponent implements OnInit {
         })
     ).subscribe(lobby => {
       this.lobby = lobby;
+      this.updateCurrentArmy();
     })
+  }
+
+  private updateCurrentArmy(){
+    if(this.userId != null && this.userId != undefined &&
+      this.lobby != null && this.lobby != undefined){
+        this.currentArmy = this.lobby.members
+        .find(m => m._userId == this.userId).army;
+      }
   }
 }

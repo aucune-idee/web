@@ -2,23 +2,46 @@
   <ng-container *ngIf="lobby;">
     <h4 class="title is-4">{{lobby.name}}</h4>
 
-    <div>
-      <button *ngIf="!isMember();else leaveButton" (click)="join()" class="button is-primary">Join</button>
-      <ng-template #leaveButton>
-        <button (click)="leave()" class="button is-primary">Leave</button>
-      </ng-template>
+    <div class="box menu">
+      <div class="navbar">
+        <div class="navbar-start">
+          <div class="navbar-item">Game type : {{lobby.type}}</div>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <button *ngIf="!isMember();else leaveButton" (click)="join()"
+              class="button is-primary">Join</button>
+            <ng-template #leaveButton>
+              <button (click)="leave()" class="button is is-primary">Leave</button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
     </div>
     
-    <hr />
+    <ng-container *ngIf="isMember()">
+        <h5 class="title is-5">My Army</h5>
+        <div class="columns is-multiline is-mobile">
+          <div *ngFor="let type of types" 
+            class="column is-2-fullhd is-3-widescreen is-4-desktop is-half-mobile">
+            <a (click)="selectArmy(type)"
+              [class.current]="type == currentArmy"
+              class="box">
+              {{ type }}
+            </a>
+          </div>
+        </div>
+    </ng-container>
+
     <h5 class="title is-5">Members</h5>
 
     <div class="columns is-multiline is-mobile">
-      <div *ngFor="let member of lobby.members" 
-        class="column is-one-quarter-fullhd is-one-quarter-widescreen is-one-third-desktop is-half-mobile">
+      <div *ngFor="let member of lobby.members"
+        class="column is-2-fullhd is-3-widescreen is-4-desktop is-half-mobile">
         <div class="box">
           <ng-container *ngIf="member._userId >= 0;else freeSlot">
-              <strong>{{member.username}}</strong> : <br />
-              {{member.army ? member.army : "no army selected"}}
+            <strong>{{member.username}}</strong> : <br />
+            {{member.army ? member.army : "no army selected"}}
           </ng-container>
           <ng-template #freeSlot>
             <div class="is-vertical-center">

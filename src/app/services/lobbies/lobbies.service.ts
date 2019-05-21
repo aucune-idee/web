@@ -7,7 +7,7 @@ import { shareReplay, map } from 'rxjs/operators';
 import { environment } from '@environment';
 import { Lobby } from '@models/lobby';
 
-import { GameType } from '@enums/game-type';
+import { GameType, Armies } from '@enums/index';
 
 export interface GetLobbiesInput{
   start?:Number,
@@ -22,6 +22,11 @@ export interface GetLobbiesOutput{
 export interface CreateLobbyInput{
   name:String,
   type:GameType,
+}
+
+export interface SelectArmyInput{
+  lobbyId:number,
+  army:Armies,
 }
 
 const LOBBY_PATH = "/lobbies";
@@ -57,8 +62,18 @@ export class LobbiesService {
       map(() => true)
     )
   }
+
   public joinLobby(id: number): Observable<boolean>{
     return this.http.put(environment.urls.game[0]+LOBBY_PATH+"/"+ id+"/join", {})
+    .pipe(
+      map(() => true)
+    )
+  }
+
+  public selectArmy(input: SelectArmyInput): Observable<boolean>{
+    return this.http.put(environment.urls.game[0]+LOBBY_PATH+"/"+ input.lobbyId +"/select-army", {
+      army:input.army
+    })
     .pipe(
       map(() => true)
     )

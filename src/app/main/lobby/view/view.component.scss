@@ -1,13 +1,39 @@
+@import "initial-variables";
+
 :host{
     .title{
         color:black;
     }
 
-    .box     {
-        height: 100%;
+    .columns{
+        justify-content: center;
+    }
 
+    .box{
+        height: 100%;
+       
         .is-vertical-center{
             height: 100%;
         }
+    }
+    a.box:not(.button):not(.dropdown-item):not(.tag){
+        color:black;
+        text-align: center;
+    }
+
+    .box.menu{
+        padding:0;
+
+        .navbar{
+            z-index: 1;
+
+            .navbar-item{
+                color:black;
+            }
+        }
+    }
+
+    .current{
+        background-color: $turquoise;
     }
 }
