@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   lobbies:Array<Lobby> = [];
   showModal:boolean = false;
 
-  @ViewChild(ModalComponent)
+  @ViewChild(ModalComponent, { static: true })
   private modal:ModalComponent;
 
   constructor(

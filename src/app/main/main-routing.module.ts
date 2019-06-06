@@ -16,7 +16,7 @@ const routes: Routes = [
     { path: 'signin', component: SigninComponent},
     { path: 'play', pathMatch: 'full', redirectTo: '/lobby'},
     { path: 'lobby',
-      loadChildren: './lobby/lobby.module#LobbyModule',
+      loadChildren: () => import('./lobby/lobby.module').then(m => m.LobbyModule),
       canActivate: [LoggedGuard]}
   ]}
 ];

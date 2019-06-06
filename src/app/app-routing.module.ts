@@ -4,9 +4,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoggedGuard } from '@guards/index';
 
 const routes: Routes = [
-  { path: 'game', loadChildren: './game/game.module#GameModule',
+  { path: 'game', loadChildren: () => import('./game/game.module').then(m => m.GameModule),
     canActivate: [LoggedGuard]},
-  { path: '', loadChildren: './main/main.module#MainModule'}
+  { path: '', loadChildren: () => import('./main/main.module').then(m => m.MainModule)}
 ];
 
 @NgModule({
