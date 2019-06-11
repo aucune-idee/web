@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
+
+import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { environment } from '../../../environments/environment';
+
+import { WebsocketService } from '@services';
 
 import * as Zdog from 'zdog';
 
@@ -10,11 +16,15 @@ import * as Zdog from 'zdog';
 })
 export class MainComponent implements OnInit {
 
-  constructor(
-    //private socket: Socket
-    ) { }
+  private gameWs: Subject<any>;
+
+  constructor(private ws:WebsocketService) { }
 
   ngOnInit() {
+    this.gameWs = <Subject<any>>this.ws.connect(environment.urls.game[0])
+      .pipe(
+        map((response:any) => response)
+      );
     //this.socket.of("game_1")
     //this.socket.emit('createGame', {game:1});
     
@@ -56,6 +66,10 @@ export class MainComponent implements OnInit {
       requestAnimationFrame( animate );
     }
     animate();
+  }
+
+  send(){
+    this.gameWs.next("1");
   }
 
 }
