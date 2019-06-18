@@ -3,19 +3,25 @@
       <label class="label">Game's name</label>
       <div class="control">
         <input [(ngModel)]="data.name"
-        name="name" class="input" type="text" placeholder="Game's name">
+          name="name" class="input" type="text" placeholder="Game's name">
       </div>
-      <div class="field">
-        <label class="label">Type</label>
-        <div class="buttons control">
-            <button *ngFor="let type of types; let i = index"
-            (click)="data.type = gameType[type]"
-            type="button" 
-            class="button"
-            [class.is-primary] = "i == data.type">
-              {{type}}
-            </button>
-        </div>
+  </div>
+  <div class="field">
+      <label class="label">Game's size</label>
+      <input  [(ngModel)]="data.size"
+        name="size" class="input" type="number" placeholder="Text input"
+        min="2" max="10">
+  </div>
+  <div class="field">
+    <label class="label">Type</label>
+    <div class="buttons control">
+        <button *ngFor="let t of types; let i = index"
+        (click)="selectType(t)"
+        type="button" 
+        class="button"
+        [class.is-primary] = "t == type">
+          {{t}}
+        </button>
     </div>
   </div>
   <button type="submit()" class="button is-primary">Create</button>

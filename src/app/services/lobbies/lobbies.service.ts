@@ -22,6 +22,7 @@ export interface GetLobbiesOutput{
 export interface CreateLobbyInput{
   name:String,
   type:GameType,
+  size:Number
 }
 
 export interface SelectArmyInput{
