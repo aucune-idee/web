@@ -19,8 +19,8 @@ export class ViewComponent implements OnInit {
   lobby:Lobby;
   userId:number;
   armies = Armies;
-  types = Object.keys(Armies).filter(key => !isNaN(Number(Armies[key])));
-  currentArmy:Armies = null;
+  types = Object.keys(Armies).filter(key => !isNaN(Number(key)));
+  currentArmy:string = null;
 
   constructor(
     private route:ActivatedRoute,
@@ -64,9 +64,7 @@ export class ViewComponent implements OnInit {
 
   public selectArmy(type):void{
     this.currentArmy = type;
-    this.lobby.members.find(m => m._userId == this.userId)
-      .army = type;
-
+    this.lobby.members.find(m => m._userId == this.userId).army = this.currentArmy;
     this.lobbyService.selectArmy({
       lobbyId: this.lobby._id,
       army : type

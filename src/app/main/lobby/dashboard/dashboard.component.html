@@ -1,5 +1,11 @@
 <div class="columns">
     <div class="column">
+        <a class="button is-primary is-pulled-right" routerLink="find">
+            <span class="icon is-small">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span>Join lobby</span>
+        </a>
         <button class="button is-primary is-pulled-right" (click)="createLobby()">
             <span class="icon is-small">
                 <i class="fas fa-plus"></i>
@@ -19,7 +25,7 @@
                 <tbody>
                     <tr *ngFor="let lobby of lobbies" [routerLink]="['./view', lobby._id]">
                         <td>{{lobby.name}}</td>
-                        <td>{{lobby.type}}</td>
+                        <td>{{gameTypes[lobby.type]}}</td>
                         <td>{{lobby.members.length }} / {{lobby.size}}</td>
                     </tr>
                 </tbody>
@@ -40,6 +46,6 @@
 <app-modal #modal>
     <div class="box">
         <h3 class="title is-3">Create lobby</h3>
-        <app-lobby-create (LobbyCreated) = "onLobbyCreated($event)"></app-lobby-create>
+        <app-lobby-create (onLobbyCreated) = "onLobbyCreated($event)"></app-lobby-create>
     </div>
 </app-modal>

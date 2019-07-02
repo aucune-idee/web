@@ -1,4 +1,4 @@
-<form (submit)="submit()">
+<form *ngIf="data" (submit)="submit()">
   <div class="field">
       <label class="label">Game's name</label>
       <div class="control">

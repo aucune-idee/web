@@ -1,0 +1,69 @@
+
+<div class="container">
+  <button class="button">Search</button>
+</div>
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="lobbies">
+        <tr *ngFor="let lobby of lobbies">
+          <td>{{lobby.name}}</td>
+          <td>{{gameType[lobby.type]}}</td>
+          <td>{{lobby.size}}</td>
+        </tr>
+    </ng-container>
+  </tbody>
+</table>
+
+<app-modal>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Min size</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+            <div class="select">
+              <select [(ngModel)]="data.type" name="type" required>
+                <option [ngValue]="null" selected>Game type</option>
+                <option *ngFor="let type of types"
+                  [ngValue]="type">{{gameType[type]}}</option>
+              </select>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Min size</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <p class="control">
+            <input [(ngModel)]="data.sizeMin" name="sizeMin"
+              class="input" type="number" placeholder="Minimum size">
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Max size</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <p class="control">
+            <input [(ngModel)]="data.sizeMax" name="sizeMax"
+              class="input" type="number" placeholder="Maximum size">
+        </p>
+      </div>
+    </div>
+  </div>
+</app-modal>

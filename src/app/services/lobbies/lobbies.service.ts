@@ -11,7 +11,11 @@ import { GameType, Armies } from '@enums/index';
 
 export interface GetLobbiesInput{
   start?:Number,
-  size?:Number
+  size?:Number,
+  type?:GameType,
+  sizeMin?:number,
+  sizeMax?:number,
+  owner?:number,
 }
 
 export interface GetLobbiesOutput{
@@ -39,7 +43,7 @@ export class LobbiesService {
 
   constructor(private http: HttpClient) {}
 
-  public getLobbies():Observable<GetLobbiesOutput>{
+  public getLobbies(input?:GetLobbiesInput):Observable<GetLobbiesOutput>{
     return this.http.get<GetLobbiesOutput>(environment.urls.game[0]+LOBBY_PATH);
   }
   public getOwnLobbies():Observable<GetLobbiesOutput>{
@@ -47,6 +51,15 @@ export class LobbiesService {
   }
   public getLobby(id:Number):Observable<Lobby>{
     return this.http.get<Lobby>(environment.urls.game[0]+LOBBY_PATH+"/"+id);
+  }
+  public findLobby(input:GetLobbiesInput):Observable<GetLobbiesOutput>{
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json; charset=utf-8');
+
+    return this.http.post<GetLobbiesOutput>(environment.urls.game[0]+LOBBY_PATH, input, {headers:headers})
+    .pipe(
+      shareReplay(1)
+    )
   }
 
   public createLobby(input: CreateLobbyInput): Observable<Lobby>{

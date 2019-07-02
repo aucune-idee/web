@@ -6,6 +6,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Lobby } from '@models/lobby';
 import { LobbiesService, GetLobbiesOutput } from '@services/lobbies';
 import { ModalComponent } from '@components/index';
+import { GameType } from '@enums/index';
 
 @Component({
   selector: 'app-lobby-dashboard',
@@ -16,6 +17,7 @@ export class DashboardComponent implements OnInit {
 
   lobbies:Array<Lobby> = [];
   showModal:boolean = false;
+  gameTypes = GameType;
 
   @ViewChild(ModalComponent, { static: true })
   private modal:ModalComponent;
@@ -41,6 +43,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onLobbyCreated(lobby):void{
+    this.lobbies.push(lobby);
     this.modal.close();
   }
 

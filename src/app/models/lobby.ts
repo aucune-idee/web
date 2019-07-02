@@ -10,7 +10,7 @@ export class Lobby {
     members:Array<{
       _userId:number;
       username?:String;
-      army?:Armies
+      army?:string
     }>
     size:number;
 }

@@ -15,7 +15,7 @@ export class CreateComponent implements OnInit {
   onLobbyCreated = new EventEmitter<Lobby>();
 
   gameType = GameType;
-  types = Object.keys(GameType).filter(key => !isNaN(Number(GameType[key])));
+  types = Object.values(GameType).filter(key => !isNaN(Number(GameType[key])));
   data:CreateLobbyInput;
   type:string;
   

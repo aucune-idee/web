@@ -10,9 +10,10 @@ import { MainComponent } from './main/main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateComponent } from './create/create.component';
 import { ViewComponent } from './view/view.component';
+import { FindLobbyComponent } from './find-lobby/find-lobby.component';
 
 @NgModule({
-  declarations: [MainComponent, DashboardComponent, CreateComponent, ViewComponent],
+  declarations: [MainComponent, DashboardComponent, CreateComponent, ViewComponent, FindLobbyComponent],
   imports: [
     LobbyRoutingModule,
     CommonModule, FormsModule, ComponentsModule

@@ -27,7 +27,7 @@
             <a (click)="selectArmy(type)"
               [class.current]="type == currentArmy"
               class="box">
-              {{ type }}
+              {{ armies[type] }}
             </a>
           </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="box">
           <ng-container *ngIf="member._userId >= 0;else freeSlot">
             <strong>{{member.username}}</strong> : <br />
-            {{member.army ? member.army : "no army selected"}}
+            {{member.army !==  undefined && member.army !== null ? armies[member.army] : "no army selected"}}
           </ng-container>
           <ng-template #freeSlot>
             <div class="is-vertical-center">
